@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+    <head>
+        <script type="application/javascript"
+                charset="utf-8"
+                src="scripts/jquery-3.3.1.min.js"></script>
+        <script type="application/javascript"
+                charset="utf-8"
+                src="scripts/goldenlayout.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles/goldenlayout-base.css"/>
+        <link rel="stylesheet" type="text/css" href="styles/goldenlayout-light-theme.css"/>
+        <style>
+         #gl-container {
+             /* We do need a height for our containing element, or you'll get a very short Golden Layout. */
+             height: 500px;
+         }
+        </style>
+    </head>
+    <body>
+        <div id="gl-container">
+        </div>
+        <script>
+         let config = {
+             settings: {
+                 showPopoutIcon: false,
+                 selectionEnabled: true
+             },
+             content: [{
+                 type: "row",
+                 content: [
+                     {
+                         type: "component",
+                         title: "Menu",
+                         id: "menu",
+                         componentName: "menu",
+                         componentState: {},
+                         width: 20,
+                         height: 100,
+                         isClosable: false
+                     },
+                     {
+                         type: "component",
+                         title: "Menu-fluff",
+                         id: "menu-fluff",
+                         componentName: "menu-fluff",
+                         componentState: {},
+                         width: 80,
+                         height: 100,
+                         isClosable: false
+                     }
+                 ],
+             }]
+         };
+         let layout = new GoldenLayout(config, $("#gl-container"));
+         layout.registerComponent("menu", function(container, state) {
+             let jqueryObject = container.getElement();
+             let e = jqueryObject[0];
+             e.classList.add("main-menu");
+             e.style.backgroundColor = "#800";
+             e.innerHTML = "<p>Hello</p><p>World!</p>";
+         });
+         layout.registerComponent("menu-fluff", function(container, state) {
+            let jqueryObject = container.getElement();
+            let e = jqueryObject[0];
+            e.style.backgroundColor = "#008";
+            e.innerHTML = "<ul><li>Bullet point</li></ul>";
+         });
+         layout.init();
+        </script>
+    </body>
+</html>
